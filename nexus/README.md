@@ -17,3 +17,10 @@ services:
             - "8123:8123"
         volumes:
             - ./data:/nexus-data
+```
+
+To use Nexus docker repository on local machine on http without ssl certificate you need to add following parameter to **docker.json** config on MacOS which is situated at **~/.docker/config.json**
+
+```json
+"insecure-registries":["0.0.0.0:8123"]
+```
