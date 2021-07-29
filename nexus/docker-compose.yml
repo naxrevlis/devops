@@ -8,3 +8,4 @@ services:
             - "8123:8123"
         volumes:
             - ./data:/nexus-data
+        restart: always
