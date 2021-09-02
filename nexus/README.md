@@ -24,3 +24,10 @@ To use Nexus docker repository on local machine on http without ssl certificate 
 ```json
 "insecure-registries":["0.0.0.0:8123"]
 ```
+
+## Configuration
+
+You need to create .env file in root folder and set LOCAL_PATH_NEXUS_DATA to store data
+```conf
+LOCAL_PATH_NEXUS_DATA=your-path
+```

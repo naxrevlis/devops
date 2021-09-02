@@ -7,5 +7,5 @@ services:
             - "8081:8081"
             - "8123:8123"
         volumes:
-            - ./data:/nexus-data
+            - "${LOCAL_PATH_NEXUS_DATA}:/nexus-data"
         restart: always
