@@ -70,8 +70,8 @@ services:
       - DRONE_SERVER_PROTO=http
       - DRONE_TLS_AUTOCERT=false
       - DRONE_AGENTS_ENABLED=true
-      - DRONE_GITEA_CLIENT_ID=849d33ff-1d7e-407d-9e24-b843dfce804c
-      - DRONE_GITEA_CLIENT_SECRET=hrJcEMWf0nmfstdxF7Le1qPXhiF4RuvJ7Y827XI76bTB
+      - DRONE_GITEA_CLIENT_ID=783824db-c298-4d00-acbb-aee18658ff45
+      - DRONE_GITEA_CLIENT_SECRET=gto_ndzdkwv446vfma7rgk66qrlcduc567lq33qr5gdkeb3t2jiaig5q
     networks:
       - appnet
 
