@@ -9,8 +9,8 @@ services:
       - APP_NAME=Gitea
       # - USER_UID=1000
       # - USER_GID=1000
-      - ROOT_URL=http://100.123.207.118:3001
-      - SSH_DOMAIN=100.123.207.118
+      - ROOT_URL=http://${SERVER_IP}:3001
+      - SSH_DOMAIN=${SERVER_IP}
       - SSH_PORT=2222
       - HTTP_PORT=3001
       - DB_TYPE=postgres
@@ -20,7 +20,7 @@ services:
       - DB_PASSWD=postgres
     restart: always
     volumes:
-      - /mnt/data/services/gitea:/data
+      - ${SERVER_FOLDER_PATH}/gitea:/data
     ports:
       - "3001:3001"
       - "2222:22"
@@ -32,7 +32,7 @@ services:
     container_name: gitea-db
     restart: always
     volumes:
-      - /mnt/data/services/gitea-db:/var/lib/postgresql/data
+      - ${SERVER_FOLDER_PATH}/gitea-db:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -48,7 +48,7 @@ services:
       - 3002:80
       - 9000
     volumes:
-      - /mnt/data/services/drone:/var/lib/drone/
+      - ${SERVER_FOLDER_PATH}/drone:/var/lib/drone/
     restart: always
     depends_on:
       - gitea
@@ -63,10 +63,10 @@ services:
       - DRONE_DATABASE_DRIVER=postgres
       - DRONE_DATABASE_DATASOURCE=postgres://postgres:postgres@gitea-db:5432/postgres?sslmode=disable
       - DRONE_GIT_ALWAYS_AUTH=false
-      - DRONE_GITEA_SERVER=http://100.123.207.118:3001
+      - DRONE_GITEA_SERVER=http://${SERVER_IP}:3001
       - DRONE_RPC_SECRET=9c3921e3e748aff725d2e16ef31fbc42
-      - DRONE_SERVER_HOST=100.123.207.118:3002
-      - DRONE_HOST=http://100.123.207.118:3002
+      - DRONE_SERVER_HOST=${SERVER_IP}:3002
+      - DRONE_HOST=http://${SERVER_IP}:3002
       - DRONE_SERVER_PROTO=http
       - DRONE_TLS_AUTOCERT=false
       - DRONE_AGENTS_ENABLED=true
@@ -85,9 +85,9 @@ services:
       - drone-server
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /mnt/data/services/drone-agent:/data
+      - ${SERVER_FOLDER_PATH}/drone-agent:/data
     environment:
-      - DRONE_RPC_SERVER=http://100.123.207.118:3002
+      - DRONE_RPC_SERVER=http://${SERVER_IP}:3002
       - DRONE_RPC_SECRET=9c3921e3e748aff725d2e16ef31fbc42
       - DRONE_RUNNER_CAPACITY=1
       - DRONE_RUNNER_NETWORKS=appnet
