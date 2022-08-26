@@ -15,9 +15,9 @@ services:
       - HTTP_PORT=3001
       - DB_TYPE=postgres
       - DB_HOST=gitea-db:5432
-      - DB_NAME=gitea
-      - DB_USER=postgres
-      - DB_PASSWD=postgres
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWD=${DB_PASSWD}
     restart: always
     volumes:
       - ${SERVER_FOLDER_PATH}/gitea:/data
@@ -34,9 +34,9 @@ services:
     volumes:
       - ${SERVER_FOLDER_PATH}/gitea-db:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=gitea
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWD}
+      - POSTGRES_DB=${DB_NAME}
     networks:
       - appnet
 
@@ -64,14 +64,14 @@ services:
       - DRONE_DATABASE_DATASOURCE=postgres://postgres:postgres@gitea-db:5432/postgres?sslmode=disable
       - DRONE_GIT_ALWAYS_AUTH=false
       - DRONE_GITEA_SERVER=http://${SERVER_IP}:3001
-      - DRONE_RPC_SECRET=9c3921e3e748aff725d2e16ef31fbc42
+      - DRONE_RPC_SECRET=${DRONE_RPC_SECRET}
       - DRONE_SERVER_HOST=${SERVER_IP}:3002
       - DRONE_HOST=http://${SERVER_IP}:3002
       - DRONE_SERVER_PROTO=http
       - DRONE_TLS_AUTOCERT=false
       - DRONE_AGENTS_ENABLED=true
-      - DRONE_GITEA_CLIENT_ID=783824db-c298-4d00-acbb-aee18658ff45
-      - DRONE_GITEA_CLIENT_SECRET=gto_ndzdkwv446vfma7rgk66qrlcduc567lq33qr5gdkeb3t2jiaig5q
+      - DRONE_GITEA_CLIENT_ID=${DRONE_GITEA_CLIENT_ID}
+      - DRONE_GITEA_CLIENT_SECRET=${DRONE_GITEA_CLIENT_SECRET}
     networks:
       - appnet
 
@@ -88,7 +88,7 @@ services:
       - ${SERVER_FOLDER_PATH}/drone-agent:/data
     environment:
       - DRONE_RPC_SERVER=http://${SERVER_IP}:3002
-      - DRONE_RPC_SECRET=9c3921e3e748aff725d2e16ef31fbc42
+      - DRONE_RPC_SECRET=${DRONE_RPC_SECRET}
       - DRONE_RUNNER_CAPACITY=1
       - DRONE_RUNNER_NETWORKS=appnet
     networks:
