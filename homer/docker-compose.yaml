@@ -4,7 +4,8 @@ services:
   homer:
     image: b4bz/homer:latest
     volumes:
-      - ${LOCAL_PATH_NEXUS_DATA}:/www/assets
+      - ${LOCAL_PATH_DATA}/homer:/www/assets
     ports:
       - 8080:8080
     restart: always
+    user: 0:0
