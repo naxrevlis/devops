@@ -5,6 +5,7 @@ services:
         image: sonatype/nexus3:latest
         ports:
             - "8081:8081"
+            - "8082:8082"
             - "8123:8123"
         volumes:
             - ${LOCAL_PATH_NEXUS_DATA}/nexus:/nexus-data
