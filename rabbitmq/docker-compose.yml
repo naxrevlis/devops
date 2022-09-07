@@ -2,12 +2,15 @@ version: "3"
 services:
  rabbitmq:
     image: "rabbitmq:3-management"
+    restart: always
     ports:
       - "5672:5672"
       - "15672:15672"
       - "15692:15692"
     volumes:
       - '${LOCAL_PATH_RABBITMQ_DATA}:/data'
+      - '${LOCAL_PATH_RAABITMQ_CONF}:/var/lib/rabbitmq/'
+      - '${LOCAL_PATH_RABBITMQ_LOG}:/var/log/rabbitmq'
 
 volumes:
   rabbitmq_data:
