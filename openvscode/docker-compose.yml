@@ -1,0 +1,17 @@
+version: "3"
+services:
+  openvscode:
+    image: "gitpod/openvscode-server:latest"
+    container_name: open-vscode
+    restart: unless-stopped
+    ports:
+      - "3003:3000"
+    networks:
+      - openvscode-server
+    volumes:
+      - ${SERVICE_DATA_DIR}/openvscode-server:/config
+      - ${SERVICE_DATA_DIR}:/service-data
+      - ${SOURCE_CODE_DIR}:/git
+    
+networks:
+  openvscode-server:
